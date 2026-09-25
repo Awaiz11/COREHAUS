@@ -71,12 +71,14 @@ export function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <NavLink
-              to="/signin"
+            <a
+              href="https://momence.com/sign-in?hostId=47062"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 text-[12px] uppercase tracking-[0.22em] text-cream/80 transition-colors hover:text-cream"
             >
               Log In
-            </NavLink>
+            </a>
             <Link
               to="/schedule"
               className="border border-cream/40 px-5 py-2.5 text-[11px] uppercase tracking-[0.22em] text-cream transition-all duration-300 hover:border-cream hover:bg-cream hover:text-ink"
@@ -103,12 +105,11 @@ export function Navbar() {
       >
         <div className="flex h-full flex-col justify-between px-6 pb-10 pt-28">
           <nav className="flex flex-col gap-2">
-            {["About", "Schedule", "Packages", "Log In"].map((label, i) => {
+            {["About", "Schedule", "Packages"].map((label, i) => {
               const map: Record<string, () => void> = {
                 About: () => go("/", "about"),
                 Schedule: () => go("/schedule"),
                 Packages: () => go("/", "packages"),
-                "Log In": () => go("/signin"),
               };
               return (
                 <button
@@ -121,6 +122,16 @@ export function Navbar() {
                 </button>
               );
             })}
+            <a
+              href="https://momence.com/sign-in?hostId=47062"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="border-b border-line py-4 text-left font-display text-5xl tracking-[0.06em] text-cream block"
+              style={{ transitionDelay: open ? `180ms` : "0ms" }}
+            >
+              Log In
+            </a>
           </nav>
           <div>
             <Link

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FadeIn } from "../components/FadeIn";
+import { FadeIn, FadeInStagger, FadeInStaggerItem } from "../components/FadeIn";
 import { Button, ButtonLink } from "../components/Button";
 import { introOffers, packages, memberships, pillars, weeklyFocus, studio } from "../data/content";
 const hero = "/images/hero.jpg";
@@ -27,7 +27,7 @@ export default function Home() {
   const today = new Date().getDay();
   const todayIdx = today === 0 ? 6 : today - 1;
 
-  const claim = () => navigate("/signin");
+  const claim = () => window.open("https://momence.com/sign-in?hostId=47062", "_blank", "noopener,noreferrer");
 
   return (
     <div>
@@ -121,9 +121,9 @@ export default function Home() {
           </div>
         </FadeIn>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
+        <FadeInStagger className="mt-16 grid gap-5 md:grid-cols-3">
           {pillars.map((p, i) => (
-            <FadeIn key={p.num} delay={i * 120}>
+            <FadeInStaggerItem key={p.num}>
               <article className="group relative overflow-hidden border border-line bg-ink-2">
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -139,9 +139,9 @@ export default function Home() {
                   <p className="mt-3 text-sm leading-relaxed text-muted">{p.text}</p>
                 </div>
               </article>
-            </FadeIn>
+            </FadeInStaggerItem>
           ))}
-        </div>
+        </FadeInStagger>
       </section>
 
       <section className="relative min-h-[70vh] overflow-hidden">
@@ -178,11 +178,11 @@ export default function Home() {
           </div>
         </FadeIn>
 
-        <div className="mt-14 grid grid-cols-2 gap-px bg-line sm:grid-cols-4 lg:grid-cols-7">
+        <FadeInStagger className="mt-14 grid grid-cols-2 gap-px bg-line sm:grid-cols-4 lg:grid-cols-7">
           {weeklyFocus.map((d, i) => {
             const active = i === todayIdx;
             return (
-              <FadeIn key={d.day} delay={i * 60}>
+              <FadeInStaggerItem key={d.day}>
                 <div className={`h-full bg-ink px-4 py-6 ${active ? "bg-ink-3" : ""}`}>
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] uppercase tracking-[0.28em] text-gold">{d.day}</span>
@@ -200,10 +200,10 @@ export default function Home() {
                     {d.className}
                   </p>
                 </div>
-              </FadeIn>
+              </FadeInStaggerItem>
             );
           })}
-        </div>
+        </FadeInStagger>
 
         <div className="mt-10 flex justify-end">
           <ButtonLink to="/schedule" variant="outline">
@@ -227,99 +227,108 @@ export default function Home() {
             </p>
           </FadeIn>
 
-          <FadeIn className="mt-16">
-            <p className="mb-6 text-[11px] uppercase tracking-[0.32em] text-gold">Intro Offers</p>
+          <FadeInStagger className="mt-16">
+            <FadeInStaggerItem>
+              <p className="mb-6 text-[11px] uppercase tracking-[0.32em] text-gold">Intro Offers</p>
+            </FadeInStaggerItem>
             <div className="grid gap-4 md:grid-cols-2">
               {introOffers.map((o) => (
-                <article
-                  key={o.name}
-                  className={`flex flex-col justify-between border p-8 transition-colors duration-300 hover:border-cream/30 ${
-                    o.featured ? "border-copper/50 bg-ink" : "border-line bg-ink"
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-display text-3xl tracking-[0.08em]">{o.name}</h3>
-                      {o.featured && (
-                        <span className="border border-copper/60 px-2 py-1 text-[9px] uppercase tracking-[0.2em] text-copper">
-                          Most started
-                        </span>
-                      )}
+                <FadeInStaggerItem key={o.name}>
+                  <article
+                    className={`h-full flex flex-col justify-between border p-8 transition-colors duration-300 hover:border-cream/30 ${
+                      o.featured ? "border-copper/50 bg-ink" : "border-line bg-ink"
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="font-display text-3xl tracking-[0.08em]">{o.name}</h3>
+                        {o.featured && (
+                          <span className="border border-copper/60 px-2 py-1 text-[9px] uppercase tracking-[0.2em] text-copper">
+                            Most started
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-6 font-display text-6xl tracking-wide">
+                        {o.price}
+                        <span className="text-3xl">{o.unit}</span>
+                      </p>
+                      <p className="mt-3 text-sm text-cream-soft">{o.detail}</p>
+                      <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">{o.note}</p>
                     </div>
-                    <p className="mt-6 font-display text-6xl tracking-wide">
-                      {o.price}
-                      <span className="text-3xl">{o.unit}</span>
-                    </p>
-                    <p className="mt-3 text-sm text-cream-soft">{o.detail}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">{o.note}</p>
-                  </div>
-                  <Button variant={o.featured ? "copper" : "outline"} className="mt-10 w-full" onClick={claim}>
-                    {o.cta}
-                  </Button>
-                </article>
+                    <Button variant={o.featured ? "copper" : "outline"} className="mt-10 w-full" onClick={claim}>
+                      {o.cta}
+                    </Button>
+                  </article>
+                </FadeInStaggerItem>
               ))}
             </div>
-          </FadeIn>
+          </FadeInStagger>
 
-          <FadeIn className="mt-20">
-            <p className="mb-6 text-[11px] uppercase tracking-[0.32em] text-gold">Packages</p>
+          <FadeInStagger className="mt-20">
+            <FadeInStaggerItem>
+              <p className="mb-6 text-[11px] uppercase tracking-[0.32em] text-gold">Packages</p>
+            </FadeInStaggerItem>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {packages.map((p) => (
-                <article
-                  key={p.name}
-                  className="group flex flex-col justify-between border border-line bg-ink p-7 transition-colors duration-300 hover:border-cream/30"
-                >
-                  {p.promo && (
-                    <span className="mb-4 w-fit border border-dashed border-copper/70 px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-copper">
-                      15% off · STRONGSEPTEMBER
-                    </span>
-                  )}
-                  {!p.promo && <span className="mb-4 h-[26px]" />}
-                  <h3 className="font-display text-2xl tracking-[0.1em]">{p.name}</h3>
-                  <p className="mt-5 font-display text-5xl tracking-wide">
-                    {p.price}
-                    <span className="text-2xl">€</span>
-                  </p>
-                  <p className="mt-2 text-sm text-cream-soft">{p.per ?? "Drop in"}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">{p.note}</p>
-                  <Button variant="outline" className="mt-8 w-full" onClick={claim}>
-                    {p.cta}
-                  </Button>
-                </article>
+                <FadeInStaggerItem key={p.name}>
+                  <article
+                    className="h-full group flex flex-col justify-between border border-line bg-ink p-7 transition-colors duration-300 hover:border-cream/30"
+                  >
+                    {p.promo && (
+                      <span className="mb-4 w-fit border border-dashed border-copper/70 px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-copper">
+                        15% off · STRONGSEPTEMBER
+                      </span>
+                    )}
+                    {!p.promo && <span className="mb-4 h-[26px]" />}
+                    <h3 className="font-display text-2xl tracking-[0.1em]">{p.name}</h3>
+                    <p className="mt-5 font-display text-5xl tracking-wide">
+                      {p.price}
+                      <span className="text-2xl">€</span>
+                    </p>
+                    <p className="mt-2 text-sm text-cream-soft">{p.per ?? "Drop in"}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">{p.note}</p>
+                    <Button variant="outline" className="mt-8 w-full" onClick={claim}>
+                      {p.cta}
+                    </Button>
+                  </article>
+                </FadeInStaggerItem>
               ))}
             </div>
-          </FadeIn>
+          </FadeInStagger>
 
-          <FadeIn className="mt-20">
-            <p className="mb-6 text-[11px] uppercase tracking-[0.32em] text-gold">Memberships</p>
+          <FadeInStagger className="mt-20">
+            <FadeInStaggerItem>
+              <p className="mb-6 text-[11px] uppercase tracking-[0.32em] text-gold">Memberships</p>
+            </FadeInStaggerItem>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {memberships.map((m) => (
-                <article
-                  key={m.name}
-                  className={`flex flex-col justify-between border p-7 transition-colors duration-300 hover:border-cream/30 ${
-                    m.unlimited ? "border-cream/25 bg-ink" : "border-line bg-ink"
-                  }`}
-                >
-                  {m.promo && (
-                    <span className="mb-4 w-fit border border-dashed border-copper/70 px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-copper">
-                      10% off · STRONGSEPTEMBER10
-                    </span>
-                  )}
-                  {!m.promo && <span className="mb-4 h-[26px]" />}
-                  <h3 className="font-display text-2xl tracking-[0.08em]">{m.name}</h3>
-                  <p className="mt-5 font-display text-5xl tracking-wide">
-                    {m.price}
-                    <span className="text-2xl">€</span>
-                  </p>
-                  <p className="mt-2 text-sm text-cream-soft">{m.per}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">{m.note}</p>
-                  <Button variant={m.unlimited ? "solid" : "outline"} className="mt-8 w-full" onClick={claim}>
-                    I want this
-                  </Button>
-                </article>
+                <FadeInStaggerItem key={m.name}>
+                  <article
+                    className={`h-full flex flex-col justify-between border p-7 transition-colors duration-300 hover:border-cream/30 ${
+                      m.unlimited ? "border-cream/25 bg-ink" : "border-line bg-ink"
+                    }`}
+                  >
+                    {m.promo && (
+                      <span className="mb-4 w-fit border border-dashed border-copper/70 px-2 py-1 text-[9px] uppercase tracking-[0.16em] text-copper">
+                        10% off · STRONGSEPTEMBER10
+                      </span>
+                    )}
+                    {!m.promo && <span className="mb-4 h-[26px]" />}
+                    <h3 className="font-display text-2xl tracking-[0.08em]">{m.name}</h3>
+                    <p className="mt-5 font-display text-5xl tracking-wide">
+                      {m.price}
+                      <span className="text-2xl">€</span>
+                    </p>
+                    <p className="mt-2 text-sm text-cream-soft">{m.per}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">{m.note}</p>
+                    <Button variant={m.unlimited ? "solid" : "outline"} className="mt-8 w-full" onClick={claim}>
+                      I want this
+                    </Button>
+                  </article>
+                </FadeInStaggerItem>
               ))}
             </div>
-          </FadeIn>
+          </FadeInStagger>
         </div>
       </section>
 

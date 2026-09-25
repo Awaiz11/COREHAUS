@@ -48,3 +48,16 @@ export function ButtonLink({
     </Link>
   );
 }
+
+export function ButtonExternalLink({
+  children,
+  className = "",
+  variant = "solid",
+  href,
+}: Shared & { href: string }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={`${base} ${styles[variant]} ${className}`}>
+      {children}
+    </a>
+  );
+}

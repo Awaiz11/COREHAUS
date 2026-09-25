@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FadeIn } from "../components/FadeIn";
-import { Button } from "../components/Button";
+import { FadeIn, FadeInStagger, FadeInStaggerItem } from "../components/FadeIn";
+import { Button, ButtonExternalLink } from "../components/Button";
 import { getUpcomingClasses, instructors, weeklyFocus, type ClassItem } from "../data/content";
 
 function formatDay(date: Date) {
@@ -75,54 +75,56 @@ export default function Schedule() {
           <p className="text-sm text-muted">{focus.muscles.join(" · ")}</p>
         </div>
 
-        <ul className="divide-y divide-line border-y border-line">
-          {list.map((c, i) => {
-            const coach = instructors[c.instructorKey];
-            const full = c.spots === 0;
-            return (
-              <li key={c.id}>
-                <FadeIn delay={Math.min(i * 40, 240)}>
-                  <div className="flex flex-col gap-5 py-6 transition-colors duration-300 hover:bg-ink-2/80 sm:flex-row sm:items-center sm:gap-8 sm:px-3">
-                    <div className="flex min-w-0 flex-1 items-center gap-4">
-                      <img
-                        src={coach.image}
-                        alt={coach.name}
-                        className="h-16 w-16 shrink-0 object-cover sm:h-[72px] sm:w-[72px]"
-                      />
-                      <div className="min-w-0">
-                        <p className="font-display text-xl tracking-[0.04em] text-cream sm:text-2xl">{c.name}</p>
-                        <p className="mt-1 text-sm text-muted">
-                          {coach.name}
-                          <span className="mx-2 text-line">/</span>
-                          {c.language}
-                        </p>
+        <FadeInStagger staggerDelay={0.05} className="divide-y divide-line border-y border-line">
+          <ul className="divide-y divide-line">
+            {list.map((c, i) => {
+              const coach = instructors[c.instructorKey];
+              const full = c.spots === 0;
+              return (
+                <li key={c.id}>
+                  <FadeInStaggerItem>
+                    <div className="flex flex-col gap-5 py-6 transition-colors duration-300 hover:bg-ink-2/80 sm:flex-row sm:items-center sm:gap-8 sm:px-3">
+                      <div className="flex min-w-0 flex-1 items-center gap-4">
+                        <img
+                          src={coach.image}
+                          alt={coach.name}
+                          className="h-16 w-16 shrink-0 object-cover sm:h-[72px] sm:w-[72px]"
+                        />
+                        <div className="min-w-0">
+                          <p className="font-display text-xl tracking-[0.04em] text-cream sm:text-2xl">{c.name}</p>
+                          <p className="mt-1 text-sm text-muted">
+                            {coach.name}
+                            <span className="mx-2 text-line">/</span>
+                            {c.language}
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="flex items-center justify-between gap-4 sm:justify-end sm:gap-10">
-                      <div className="text-left sm:text-right">
-                        <p className="font-display text-2xl tracking-wide">
-                          {c.time}
-                          <span className="text-sm text-muted"> – {c.endTime}</span>
-                        </p>
-                        <p className={`mt-1 text-[11px] uppercase tracking-[0.18em] ${full ? "text-copper" : "text-muted"}`}>
-                          {full ? "Waitlist" : `${c.spots} spots left`}
-                        </p>
+                      <div className="flex items-center justify-between gap-4 sm:justify-end sm:gap-10">
+                        <div className="text-left sm:text-right">
+                          <p className="font-display text-2xl tracking-wide">
+                            {c.time}
+                            <span className="text-sm text-muted"> – {c.endTime}</span>
+                          </p>
+                          <p className={`mt-1 text-[11px] uppercase tracking-[0.18em] ${full ? "text-copper" : "text-muted"}`}>
+                            {full ? "Waitlist" : `${c.spots} spots left`}
+                          </p>
+                        </div>
+                        <Button
+                          variant={full ? "outline" : "solid"}
+                          className="min-w-[132px] px-5"
+                          onClick={() => setBooked(c)}
+                        >
+                          {full ? "Join waitlist" : "Book class"}
+                        </Button>
                       </div>
-                      <Button
-                        variant={full ? "outline" : "solid"}
-                        className="min-w-[132px] px-5"
-                        onClick={() => setBooked(c)}
-                      >
-                        {full ? "Join waitlist" : "Book class"}
-                      </Button>
                     </div>
-                  </div>
-                </FadeIn>
-              </li>
-            );
-          })}
-        </ul>
+                  </FadeInStaggerItem>
+                </li>
+              );
+            })}
+          </ul>
+        </FadeInStagger>
       </div>
 
       {booked && (
@@ -138,9 +140,9 @@ export default function Schedule() {
             <p className="mt-6 text-sm leading-relaxed text-muted">
               Sign in to confirm your machine. New to Corehaus? Create an account and we will hold your spot.
             </p>
-            <Button className="mt-8 w-full" onClick={() => navigate("/signin")}>
+            <ButtonExternalLink className="mt-8 w-full" href="https://momence.com/sign-in?hostId=47062">
               Continue to log in
-            </Button>
+            </ButtonExternalLink>
             <button
               onClick={() => setBooked(null)}
               className="mt-4 w-full text-center text-[11px] uppercase tracking-[0.2em] text-muted hover:text-cream"
