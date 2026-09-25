@@ -103,8 +103,8 @@ export function Navbar() {
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
-        <div className="flex h-full flex-col justify-between px-6 pb-10 pt-28">
-          <nav className="flex flex-col gap-2">
+        <div className="flex h-full flex-col justify-between px-6 pb-8 pt-24">
+          <nav className="flex flex-col">
             {["About", "Schedule", "Packages"].map((label, i) => {
               const map: Record<string, () => void> = {
                 About: () => go("/", "about"),
@@ -115,7 +115,7 @@ export function Navbar() {
                 <button
                   key={label}
                   onClick={map[label]}
-                  className="border-b border-line py-4 text-left font-display text-5xl tracking-[0.06em] text-cream"
+                  className="border-b border-line py-3 text-left font-display text-3xl tracking-[0.06em] text-cream uppercase"
                   style={{ transitionDelay: open ? `${i * 60}ms` : "0ms" }}
                 >
                   {label}
@@ -127,7 +127,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="border-b border-line py-4 text-left font-display text-5xl tracking-[0.06em] text-cream block"
+              className="border-b border-line py-3 text-left font-display text-3xl tracking-[0.06em] text-cream uppercase block"
               style={{ transitionDelay: open ? `180ms` : "0ms" }}
             >
               Log In
@@ -137,11 +137,13 @@ export function Navbar() {
             <Link
               to="/schedule"
               onClick={() => setOpen(false)}
-              className="flex w-full items-center justify-center bg-cream py-4 text-[12px] uppercase tracking-[0.24em] text-ink"
+              className="flex w-full items-center justify-center bg-cream py-3.5 text-[11px] font-medium uppercase tracking-[0.22em] text-ink transition-colors hover:bg-white"
             >
               Book your class
             </Link>
-            <p className="mt-6 font-serif italic text-muted">Sarrià-Sant Gervasi, Barcelona</p>
+            <p className="mt-5 text-center font-serif text-sm italic leading-relaxed text-muted">
+              Sarrià-Sant Gervasi, Barcelona
+            </p>
           </div>
         </div>
       </div>
