@@ -53,10 +53,10 @@ export function PromoPopup() {
         aria-label="Dismiss promotion"
       />
 
-      <div className="animate-scale-in relative grid max-h-[92vh] w-full max-w-[920px] overflow-hidden border border-line bg-ink-2 shadow-[0_40px_80px_rgba(0,0,0,0.55)] md:grid-cols-2">
+      <div className="animate-scale-in relative grid max-h-[92vh] w-full max-w-[920px] overflow-hidden border border-white/12 bg-ink-2 shadow-[0_40px_80px_rgba(0,0,0,0.65)] md:grid-cols-2">
         <button
           onClick={close}
-          className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center border border-cream/20 text-cream transition-colors hover:border-cream hover:bg-cream hover:text-ink"
+          className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center border border-cream/20 text-cream transition-all duration-300 hover:border-cream hover:bg-cream hover:text-ink"
           aria-label="Close"
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -74,15 +74,15 @@ export function PromoPopup() {
           <div
             className="absolute inset-0 md:hidden"
             style={{
-              backgroundImage: `linear-gradient(180deg, rgba(17,13,13,0.55), rgba(17,13,13,0.92)), url(${promo})`,
+              backgroundImage: `linear-gradient(180deg, rgba(28,18,24,0.55), rgba(28,18,24,0.92)), url(${promo})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           />
           <div className="relative">
-            <p className="text-[11px] uppercase tracking-[0.42em] text-copper">Limited offer</p>
+            <p className="text-[11px] uppercase tracking-[0.42em] text-gold">Limited offer</p>
             <h2 className="mt-4 font-display text-5xl tracking-[0.08em] text-cream sm:text-6xl">SUMMER PROMO</h2>
-            <div className="mt-3 h-px w-16 bg-copper" />
+            <div className="mt-3 h-px w-16 bg-gold/40" />
 
             <div className="mt-8 space-y-6 text-cream">
               <div>
@@ -99,12 +99,12 @@ export function PromoPopup() {
               Get yours now. Start to give yourself the work and love you deserve with us in September! 🌶️
             </p>
 
-            <Button variant="copper" className="mt-9 w-full" onClick={goPackages}>
+            <Button variant="parchment" className="mt-9 w-full" onClick={goPackages}>
               Get your package here
             </Button>
             <button
               onClick={close}
-              className="mt-4 w-full text-center text-[11px] uppercase tracking-[0.22em] text-muted transition-colors hover:text-cream"
+              className="mt-4 w-full text-center text-[11px] uppercase tracking-[0.22em] text-muted transition-colors duration-300 hover:text-cream"
             >
               Continue to studio
             </button>

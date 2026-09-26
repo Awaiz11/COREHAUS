@@ -52,7 +52,7 @@ export function Navbar() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled || open ? "bg-ink/90 backdrop-blur-md border-b border-line" : "bg-transparent"
+          scrolled || open ? "bg-ink/92 backdrop-blur-md border-b border-white/10" : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 md:px-10">
@@ -63,7 +63,7 @@ export function Navbar() {
               <button
                 key={l.label}
                 onClick={() => go(l.to, l.hash)}
-                className="text-[12px] uppercase tracking-[0.22em] text-cream/70 transition-colors hover:text-cream"
+                className="text-[12px] uppercase tracking-[0.22em] text-cream/65 transition-colors duration-300 hover:text-cream"
               >
                 {l.label}
               </button>
@@ -75,13 +75,13 @@ export function Navbar() {
               href="https://momence.com/sign-in?hostId=47062"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-[12px] uppercase tracking-[0.22em] text-cream/80 transition-colors hover:text-cream"
+              className="px-4 py-2 text-[12px] uppercase tracking-[0.22em] text-cream/70 transition-colors duration-300 hover:text-cream"
             >
               Log In
             </a>
             <Link
               to="/schedule"
-              className="border border-cream/40 px-5 py-2.5 text-[11px] uppercase tracking-[0.22em] text-cream transition-all duration-300 hover:border-cream hover:bg-cream hover:text-ink"
+              className="border border-cream/35 px-5 py-2.5 text-[11px] uppercase tracking-[0.22em] text-cream transition-all duration-300 ease-in-out hover:border-cream/70 hover:bg-cream hover:text-ink"
             >
               Book your class
             </Link>
@@ -92,8 +92,8 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
           >
-            <span className={`h-px w-6 bg-cream transition-all ${open ? "translate-y-[4px] rotate-45" : ""}`} />
-            <span className={`h-px w-6 bg-cream transition-all ${open ? "-translate-y-[4px] -rotate-45" : ""}`} />
+            <span className={`h-px w-6 bg-cream transition-all duration-300 ${open ? "translate-y-[4px] rotate-45" : ""}`} />
+            <span className={`h-px w-6 bg-cream transition-all duration-300 ${open ? "-translate-y-[4px] -rotate-45" : ""}`} />
           </button>
         </div>
       </header>
@@ -115,7 +115,7 @@ export function Navbar() {
                 <button
                   key={label}
                   onClick={map[label]}
-                  className="border-b border-line py-3 text-left font-display text-3xl tracking-[0.06em] text-cream uppercase"
+                  className="border-b border-white/10 py-4 text-left font-display text-3xl tracking-[0.06em] text-cream uppercase transition-colors duration-300 hover:text-cream/70"
                   style={{ transitionDelay: open ? `${i * 60}ms` : "0ms" }}
                 >
                   {label}
@@ -127,7 +127,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="border-b border-line py-3 text-left font-display text-3xl tracking-[0.06em] text-cream uppercase block"
+              className="border-b border-white/10 py-4 text-left font-display text-3xl tracking-[0.06em] text-cream uppercase block transition-colors duration-300 hover:text-cream/70"
               style={{ transitionDelay: open ? `180ms` : "0ms" }}
             >
               Log In
@@ -137,11 +137,11 @@ export function Navbar() {
             <Link
               to="/schedule"
               onClick={() => setOpen(false)}
-              className="flex w-full items-center justify-center bg-cream py-3.5 text-[11px] font-medium uppercase tracking-[0.22em] text-ink transition-colors hover:bg-white"
+              className="flex w-full items-center justify-center bg-cream py-3.5 text-[11px] font-medium uppercase tracking-[0.22em] text-ink transition-colors duration-300 hover:bg-white"
             >
               Book your class
             </Link>
-            <p className="mt-5 text-center font-serif text-sm italic leading-relaxed text-muted">
+            <p className="mt-6 text-center font-serif text-sm italic leading-relaxed text-muted">
               Sarrià-Sant Gervasi, Barcelona
             </p>
           </div>

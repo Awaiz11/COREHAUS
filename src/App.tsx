@@ -34,7 +34,7 @@ export default function App() {
     <>
       {overlayVisible && (
         <div
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0a] transition-all duration-1000 ease-[cubic-bezier(0.7,0,0.3,1)] ${
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-[#1c1218] transition-all duration-1000 ease-[cubic-bezier(0.7,0,0.3,1)] ${
             loading ? "opacity-100" : "-translate-y-full"
           }`}
         >

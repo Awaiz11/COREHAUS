@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "solid" | "outline" | "ghost" | "copper";
+type Variant = "solid" | "outline" | "ghost" | "parchment";
 
 type Shared = {
   children: ReactNode;
@@ -13,15 +13,15 @@ const styles: Record<Variant, string> = {
   solid:
     "bg-cream text-ink hover:bg-white border border-cream",
   outline:
-    "bg-transparent text-cream border border-cream/35 hover:border-cream hover:bg-cream/5",
+    "bg-transparent text-cream border border-cream/30 hover:border-cream/70 hover:bg-cream/5",
   ghost:
-    "bg-transparent text-cream border border-transparent hover:text-copper",
-  copper:
-    "bg-copper text-cream border border-copper hover:bg-copper-light",
+    "bg-transparent text-cream border border-transparent hover:text-accent hover:border-cream/20",
+  parchment:
+    "bg-cream/10 text-cream border border-cream/25 hover:bg-cream/18 hover:border-cream/50",
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 px-7 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.22em] transition-all duration-300 disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 px-7 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.22em] transition-all duration-300 ease-in-out disabled:opacity-50 disabled:pointer-events-none";
 
 export function Button({
   children,
